@@ -3,17 +3,24 @@ class AuthController extends Controller
 {
      public $errors = [];
 
-    public function register($errors=null)
+    public function register()
     {
-        if($errors != null){
-            $data['errors'] = $errors;
+       
+        if($_SESSION['register_errors'] != null){
+            $data['errors'] = $_SESSION['register_errors'];
+            $_SESSION['register_errors']=null;
             return $this->renderView('auth/register',$data);
         }
        return $this->renderView('auth/register');
     }
     public function login()
     {
-    return $this->renderView('auth/login');
+        if($_SESSION['login_errors'] != null){
+            $data['errors'] = $_SESSION['login_errors'];
+            $_SESSION['login_errors']=null;
+            return $this->renderView('auth/login',$data);
+        }
+       return $this->renderView('auth/login');
     }
     public function validateRegisterForm(){
         $firstName = isset($_POST['first_name'])?htmlspecialchars(strip_tags($_POST['first_name'])):'';
@@ -31,15 +38,15 @@ class AuthController extends Controller
         if(empty($email)){
             $this->errors['email'] ="L'email est requis";
         }
-        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-            $this->errors['email'] = "L'email n'est pas valide";
-        }
-        else{
-
-            $isEmailTaken = $this->getModel('AuthModel')->isEmailTaken($email);
+        if(filter_var($email,FILTER_VALIDATE_EMAIL)){
+             $isEmailTaken = $this->getModel('AuthModel')->isEmailTaken($email);
             if( $isEmailTaken){
                 $this->errors['email'] = "L'email est déjà prit";
             }
+        }
+        else{
+$this->errors['email'] = "L'email n'est pas valide";
+           
         }
         if(empty($password)){
             $this->errors['password'] ="Le mot de passe est requis";
@@ -53,7 +60,8 @@ class AuthController extends Controller
             }
         }
         if(!empty($this->errors)){
-            return $this->register($this->errors);
+            $_SESSION['register_errors']=$this->errors;
+            return  redirectTo("/inscription");
         }
         if(empty($this->errors)){
 
@@ -77,6 +85,41 @@ class AuthController extends Controller
         
     }
     public function validateLoginForm(){
+        $email = isset($_POST['email'])?htmlspecialchars(strip_tags($_POST['email'])):'';
+        $password = isset($_POST['password'])?htmlspecialchars(strip_tags($_POST['password'])):'';
 
+        
+        if(empty($email)){
+            $this->errors['email'] ="L'email est requis";
+        }
+       else{
+            if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+                $this->errors['email'] = "L'email n'est pas valide";
+            }
+       }
+        if(empty($password)){
+            $this->errors['password'] ="Le mot de passe est requis";
+        }
+        if(!empty($this->errors)){
+            $_SESSION['login_errors']=$this->errors;
+            return  redirectTo("/connexion");
+        }
+        if(empty($this->errors)){
+
+            $user = $this->getModel("AuthModel")->getUserByEmail($email);
+
+            if($user){
+                
+                if(password_verify($password,$user->password)){
+                   unset($user->password);
+                   setUserData($user);
+                 redirectTo("/");
+                }
+            } 
+            else{
+                return  redirectTo("/connexion");
+            } 
+            
+        }
     }
 }

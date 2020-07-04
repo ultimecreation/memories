@@ -7,9 +7,9 @@ function publicUrl($partial = null)
 {
     return PUBLIC_URL.$partial;
 }
-function redirectTo($endPath=null)
+function redirectTo($endPath=null,$data=null)
 {
-    $path = siteUrl($endPath);
+    $path = siteUrl($endPath,$data);
 
     header("Location: {$path}");
 }

@@ -28,4 +28,24 @@ class AuthModel extends Model
             return $e->getMessage();
         }
     }
+
+    public function getUserByEmail($email){
+        $req = $this->bdd->prepare("SELECT id,first_name,last_name,email,password FROM users WHERE email=?");
+        $req->execute(array($email));
+        $user = $req->fetch();
+
+        $req = $this->bdd->prepare("
+            SELECT name FROM user_roles
+            JOIN roles ON user_roles.role_id=roles.id
+            WHERE user_roles.user_id=?
+            
+        ");
+        $req->execute(array($user->id));
+        $roles = $req->fetchAll();
+        foreach($roles as $role){
+            $user->roles[] = $role->name;
+        }
+        
+        return $user;
+    }
 }

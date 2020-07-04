@@ -20,3 +20,10 @@ function userLogoutRequest()
 {
     unset($_SESSION['user_logged']);
 }
+function startSession(){
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+   
+    
+}
