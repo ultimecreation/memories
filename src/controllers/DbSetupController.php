@@ -1,0 +1,57 @@
+<?php
+class DbSetupController extends Controller
+{
+    public function index()
+    {
+        $dbName = '';
+
+        
+
+
+        // create PDO connection
+        function getConnection($dbName = null)
+        {
+            try {
+                $bdd = new PDO("mysql:host=localhost;dbname=$dbName;charset=utf8", "root", "");
+                $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $bdd->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+                return $bdd;
+            } catch (Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        // CREATE DATABASE IF NOT EXISTS
+        if ($dbName === '') {
+            $bdd = getConnection();
+            $query = $bdd->query("
+                CREATE DATABASE IF NOT EXISTS my_website
+                CHARACTER SET = 'utf8'
+                COLLATE = 'utf8_general_ci';
+        ");
+            $res = $query->execute();
+            debug($res);
+            if ($res === 1) {
+                $res->closeCursor();
+                $bdd = null;
+            }
+        } else {
+        // CREATE TABLES IF NOT EXISTS
+        $bdd = getConnection($dbName);
+
+        // CREATE USERS TABLE
+        $query = $bdd->query("
+            CREATE TABLE IF NOT EXISTS users(
+                id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+                first_name VARCHAR(255) NOT NULL COMMENT 'prénom',
+                last_name VARCHAR(255) NOT NULL COMMENT 'nom de famille',
+                email VARCHAR(255) NOT NULL COMMENT 'email utilisateur',
+                created_at DATETIME DEFAULT NOW() COMMENT 'date de création du compte'
+            )ENGINE=InnoDB;
+        ");
+        $res = $query->execute();
+            }
+    
+    }
+    
+}
