@@ -100,7 +100,18 @@ class DbSetupController extends Controller
             ");
             $res = $query->execute();
            
-           
+            $query = $bdd->query("
+            CREATE TABLE IF NOT EXISTS user_likes(
+                user_id INT(11) NOT NULL,
+                article_id INT(11) NOT NULL,
+                created_at DATETIME DEFAULT NOW() COMMENT 'date de création du like',
+                CONSTRAINT fk1_liked_by_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                CONSTRAINT fk2_article_id FOREIGN KEY (article_id) REFERENCES articles(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                PRIMARY KEY(user_id,article_id)
+            )ENGINE=InnoDB;
+            ");
+            $res = $query->execute();
+            debug($res);
         }
     
     }
