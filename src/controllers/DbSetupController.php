@@ -51,7 +51,7 @@ class DbSetupController extends Controller
                     created_at DATETIME DEFAULT NOW() COMMENT 'date de création du compte',
                     confirmation_token VARCHAR(255) DEFAULT NULL COMMENT 'token de confirmation de création de compte',
                     consfirmation_token_requested_at VARCHAR(255) DEFAULT NULL COMMENT 'date de création du token de confirmation ',
-                    reset_token VARCHAR(255) NOT NULL COMMENT 'token de réinitialisation',
+                    reset_token VARCHAR(255) DEFAULT NULL COMMENT 'token de réinitialisation',
                     reset_token_requested_at DATETIME DEFAULT NULL COMMENT 'date de création du token de réinitialisation '
                 )ENGINE=InnoDB;
             ");

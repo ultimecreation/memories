@@ -1,22 +1,13 @@
 <?php
 function siteUrl($partial = null)
 {
-    if ($_SERVER['HTTP_HOST'] === 'localhost') {
-        if ($partial) {
-            return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $partial;
-        } else {
-            return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-        }
-    } else {
-        if ($partial) {
-            return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $partial;
-        } else {
-            return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'];
-        }
-    }
+    return BASE_URL.$partial;
 }
-
-function redirectTo($endPath)
+function publicUrl($partial = null)
+{
+    return PUBLIC_URL.$partial;
+}
+function redirectTo($endPath=null)
 {
     $path = siteUrl($endPath);
 

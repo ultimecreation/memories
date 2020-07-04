@@ -17,10 +17,10 @@ class Controller
         return new $model;
     }
 
-    public function renderView($content, $data)
+    public function renderView($content, $data=null)
     {
         // load content
-        extract($data);
+        // extract($data);
         //load template
         if (empty($data['template'])) {
             if (file_exists("../src/views/templates/base_header.php")) {

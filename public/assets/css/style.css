@@ -1,3 +1,51 @@
-body {
-  background: #000;
+* {
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
+
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+body #main__nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body #main__nav .logo {
+  width: 250px;
+}
+
+@media (min-width: 600px) {
+  body #main__nav nav {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    width: 100%;
+  }
+  body #main__nav nav ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    list-style: none;
+  }
+  body #main__nav nav ul li {
+    padding: 0.5rem 1rem;
+  }
+}
+
+body form .form-group p.danger {
+  color: red;
+}
+/*# sourceMappingURL=style.css.map */
