@@ -56,7 +56,17 @@ class DbSetupController extends Controller
                 )ENGINE=InnoDB;
             ");
             $res = $query->execute();
-            debug($res);
+
+            $query = $bdd->query("
+                CREATE TABLE IF NOT EXISTS roles(
+                    id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+                    role_name VARCHAR(255) NOT NULL COMMENT 'nom du rôle',
+                    created_at DATETIME DEFAULT NOW() COMMENT 'date de création du rôle'
+                )ENGINE=InnoDB;
+            ");
+            $res = $query->execute();
+            
+           
         }
     
     }
