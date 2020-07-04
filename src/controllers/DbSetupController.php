@@ -66,7 +66,17 @@ class DbSetupController extends Controller
             ");
             $res = $query->execute();
             
-           
+            $query = $bdd->query("
+                CREATE TABLE IF NOT EXISTS user_roles(
+                    user_id INT(11) NOT NULL,
+                    role_id INT(11) NOT NULL,
+                    PRIMARY KEY(user_id,role_id),
+                    CONSTRAINT fk1_user_id FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+                    CONSTRAINT fk2_role_id FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE ON UPDATE CASCADE
+                )ENGINE=InnoDB;
+            ");
+            $res = $query->execute();
+            debug($res);
         }
     
     }
