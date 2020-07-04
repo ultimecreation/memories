@@ -86,6 +86,20 @@ class DbSetupController extends Controller
             ");
             $res = $query->execute();
             
+            $query = $bdd->query("
+                CREATE TABLE IF NOT EXISTS articles(
+                    id INT(11) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+                    author_id INT(11) NOT NULL,
+                    category_id INT(11) NOT NULL,
+                    title VARCHAR(255) NOT NULL COMMENT 'nom de la catégorie',
+                    content TEXT NOT NULL COMMENT 'contenu de l\'article',
+                    created_at DATETIME DEFAULT NOW() COMMENT 'date de création de l\'article',
+                    CONSTRAINT fk1_author_id FOREIGN KEY (author_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
+                    CONSTRAINT fk2_category_id FOREIGN KEY (category_id) REFERENCES categories(id) ON UPDATE CASCADE ON DELETE CASCADE 
+                )ENGINE=InnoDB;
+            ");
+            $res = $query->execute();
+           
            
         }
     
