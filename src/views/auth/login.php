@@ -1,6 +1,6 @@
 <h1>Connexion</h1>
 
-<form action="<?php echo siteUrl();?>/validate-login-form" method="POST">
+<form action="<?php echo siteUrl();?>/connexion" method="POST">
 <?php //debug($data['errors']);?>
 
    <div class="form-group">

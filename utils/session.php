@@ -24,6 +24,9 @@ function startSession(){
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-   
+   debug(array($_SESSION));
     
+}
+function setFlashMessage($type,$message){
+    $_SESSION['messages'] = array($type=>$message);
 }

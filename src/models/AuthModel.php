@@ -7,7 +7,6 @@ class AuthModel extends Model
         $req->execute(array($email));
         return $req->fetch();
     }
-
     public function saveUser($user){
         try{
             $this->bdd->beginTransaction();

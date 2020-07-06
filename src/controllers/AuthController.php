@@ -12,22 +12,21 @@ class AuthController extends Controller
             return $this->renderView('auth/register',$data);
         } */
         if($_SERVER['REQUEST_METHOD']==='POST'){
-            $this->validateRegisterForm();
+            // todo set $user
+            $user = $this->bindUser($_POST);
+            $this->validateRegisterForm($user);
+          
             if(!empty($this->errors)){
-               debug($this->errorrs);die();
+               $data['errors'] = $this->errors;
+               return $this->renderView('auth/register',$data);
             }
             if(empty($this->errors)){
-                $user = new StdClass();
-               
-                // encrypt password
-                $user->password = password_hash($password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
-                debug($user);die();
-                // fill user with data
-                $user->first_name = $firstName;
-                $user->last_name = $lastName;
-                $user->email = $email;
-    
+                
+                 // encrypt password
+                 $user->password = password_hash($password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
+                
                 if($this->getModel('AuthModel')->saveUser($user) === true) {
+                    setFlashMessage('success',"Inscription réussie");
                     redirectTo("/");
                 }
             }  
@@ -37,31 +36,48 @@ class AuthController extends Controller
     }
     public function login()
     {
-        if($_SESSION['login_errors'] != null){
-            $data['errors'] = $_SESSION['login_errors'];
-            $_SESSION['login_errors']=null;
-            return $this->renderView('auth/login',$data);
+    
+    if($_SERVER['REQUEST_METHOD']==='POST'){
+        // todo set $user
+        $user = $this->bindUser($_POST);
+        $this->validateLoginForm($user);
+      
+        if(!empty($this->errors)){
+           $data['errors'] = $this->errors;
+           return $this->renderView('auth/login',$data);
         }
-       return $this->renderView('auth/login');
-    }
-    public function validateRegisterForm(){
-        $firstName = isset($_POST['first_name'])?htmlspecialchars(strip_tags($_POST['first_name'])):'';
-        $lastName = isset($_POST['last_name'])?htmlspecialchars(strip_tags($_POST['last_name'])):'';
-        $email = isset($_POST['email'])?htmlspecialchars(strip_tags($_POST['email'])):'';
-        $password = isset($_POST['password'])?htmlspecialchars(strip_tags($_POST['password'])):'';
-        $password_confirm = isset($_POST['password_confirm'])?htmlspecialchars(strip_tags($_POST['password_confirm'])):'';
+        if(empty($this->errors)){
+        
+            $storedUser = $this->getModel("AuthModel")->getUserByEmail($user->email);  
 
-        if(empty($firstName)){
+            if(!password_verify($user->password,$storedUser->password)){
+                setFlashMessage('danger',"Les identifiants ne correspondent pas à un utilisateur");
+                return $this->renderView('auth/login',);
+            }
+            else{
+                setUserData($user);
+                setFlashMessage('success',"Connexion réussie");
+                redirectTo("/");
+            }
+              
+        }  
+    }
+    
+   return $this->renderView('auth/login');
+    }
+    public function validateRegisterForm($user){
+       
+        if(empty($user->first_name)){
             $this->errors['first_name'] = "Le prénom est requis";
         }
-        if(empty($lastName)){
+        if(empty($user->last_name)){
             $this->errors['last_name'] = "Le nom est requis";
         }
-        if(empty($email)){
+        if(empty($user->email)){
             $this->errors['email'] ="L'email est requis";
         }
-        if(filter_var($email,FILTER_VALIDATE_EMAIL)){
-             $isEmailTaken = $this->getModel('AuthModel')->isEmailTaken($email);
+        if(filter_var($user->email,FILTER_VALIDATE_EMAIL)){
+             $isEmailTaken = $this->getModel('AuthModel')->isEmailTaken($user->email);
             if( $isEmailTaken){
                 $this->errors['email'] = "L'email est déjà prit";
             }
@@ -70,58 +86,59 @@ class AuthController extends Controller
             $this->errors['email'] = "L'email n'est pas valide";
            
         }
-        if(empty($password)){
+        if(empty($user->password)){
             $this->errors['password'] ="Le mot de passe est requis";
         }
-        if(empty($password_confirm)){
+        if(empty($user->password_confirm)){
             $this->errors['password_confirm'] ="La confirmation du mot de passe est requise";
         }
         else{
-            if($password !== $password_confirm){
+            if($user->password !== $user->password_confirm){
                 $this->errors['password'] ="Les mots de passe ne correspondent pas";
             }
         }
-
         return  $this->errors;
         
         
     }
-    public function validateLoginForm(){
-        $email = isset($_POST['email'])?htmlspecialchars(strip_tags($_POST['email'])):'';
-        $password = isset($_POST['password'])?htmlspecialchars(strip_tags($_POST['password'])):'';
-
-        
-        if(empty($email)){
+    
+    public function validateLoginForm($user){
+        if(empty($user->email)){
             $this->errors['email'] ="L'email est requis";
         }
-       else{
-            if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
-                $this->errors['email'] = "L'email n'est pas valide";
-            }
-       }
-        if(empty($password)){
+        if(empty($user->password)){
             $this->errors['password'] ="Le mot de passe est requis";
         }
-        if(!empty($this->errors)){
-            $_SESSION['login_errors']=$this->errors;
-            return  redirectTo("/connexion");
-        }
-        if(empty($this->errors)){
-
-            $user = $this->getModel("AuthModel")->getUserByEmail($email);
-
-            if($user){
-                
-                if(password_verify($password,$user->password)){
-                   unset($user->password);
-                   setUserData($user);
-                 redirectTo("/");
-                }
-            } 
-            else{
-                return  redirectTo("/connexion");
-            } 
-            
-        }
+        return $this->errors;
     }
+   /**
+    * 
+    */
+    public function bindUser($incomingData,$context=null){ 
+        // create $user object
+        $user = new stdClass();
+
+        // if registration ,process estra data
+        if($context='register'){
+            $firstName = isset($_POST['first_name'])?htmlspecialchars(strip_tags($_POST['first_name'])):'';
+            $lastName = isset($_POST['last_name'])?htmlspecialchars(strip_tags($_POST['last_name'])):'';
+            
+            $password_confirm = isset($_POST['password_confirm'])?htmlspecialchars(strip_tags($_POST['password_confirm'])):'';
+
+            // fill user with data
+            $user->first_name = $firstName;
+            $user->last_name = $lastName;
+           
+            $user->password_confirm = $password_confirm;
+        }
+
+        // if login process login data
+        $email = isset($_POST['email'])?htmlspecialchars(strip_tags($_POST['email'])):'';
+        $password = isset($_POST['password'])?htmlspecialchars(strip_tags($_POST['password'])):'';
+        $user->email = $email;
+        $user->password = $password;
+
+        // return $user object
+        return $user;
+    } 
 }

@@ -1,5 +1,5 @@
 <h1>Inscription</h1>
-<form action="<?php echo siteUrl();?>/validate-register-form" method="POST">
+<form action="<?php echo siteUrl();?>/inscription" method="POST">
 <?php //debug($data['errors']);?>
 
    <div class="form-group">
@@ -21,7 +21,7 @@
        <input type="email" name="email" id="email">
        <?php $email_err = isset($data['errors']['email'])?  $data['errors']['email']:"";
         echo "<p class='danger'>$email_err</p>";
-        ?>
+        ?> 
    </div>
    <div class="form-group">
        <label for="password">Mot de passe</label>
@@ -33,7 +33,7 @@
    <div class="form-group">
        <label for="password_confirm">Confirmation mot de passe</label>
        <input type="password" name="password_confirm" id="password_confirm">
-       <?php $password_confirm_err = isset($data['errors']['email'])?  $data['errors']['email']:"";
+       <?php $password_confirm_err = isset($data['errors']['password_confirm'])?  $data['errors']['password_confirm']:"";
         echo "<p class='danger'>$password_confirm_err</p>";
         ?>
    </div>
