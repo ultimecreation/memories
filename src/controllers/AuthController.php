@@ -14,7 +14,7 @@ class AuthController extends Controller
         if($_SERVER['REQUEST_METHOD']==='POST'){
             $this->validateRegisterForm();
             if(!empty($this->errors)){
-               
+               debug($this->errorrs);die();
             }
             if(empty($this->errors)){
                 $user = new StdClass();
