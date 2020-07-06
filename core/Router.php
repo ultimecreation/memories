@@ -6,6 +6,7 @@ class Router
     protected $controller = 'HomeController';
     protected $method = 'index';
     protected $params = [];
+    protected $routes = [];
 
     public function __construct()
     {
@@ -16,12 +17,12 @@ class Router
         // initialise the trigger if no route found
         $routeFound = false;
         // filter routes by server method
-        $routesByMethod = array_filter($this->routes, function ($route) {
+        /* $routesByMethod = array_filter($this->routes, function ($route) {
             return $route['method'] == $_SERVER['REQUEST_METHOD'];
-        });
+        }); */
 
         // loop through route looking for a match
-        foreach ($routesByMethod as $route) {
+        foreach ($this->routes as $route) {
             $urlToTest = $route['url'];
 
             // check if first match is an exact match
