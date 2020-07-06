@@ -6,11 +6,33 @@ class AuthController extends Controller
     public function register()
     {
        
-        if($_SESSION['register_errors'] != null){
+        /* if($_SESSION['register_errors'] != null){
             $data['errors'] = $_SESSION['register_errors'];
             $_SESSION['register_errors']=null;
             return $this->renderView('auth/register',$data);
+        } */
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $this->validateRegisterForm();
+            if(!empty($this->errors)){
+               
+            }
+            if(empty($this->errors)){
+                $user = new StdClass();
+               
+                // encrypt password
+                $user->password = password_hash($password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
+                debug($user);die();
+                // fill user with data
+                $user->first_name = $firstName;
+                $user->last_name = $lastName;
+                $user->email = $email;
+    
+                if($this->getModel('AuthModel')->saveUser($user) === true) {
+                    redirectTo("/");
+                }
+            }  
         }
+        
        return $this->renderView('auth/register');
     }
     public function login()
@@ -33,7 +55,7 @@ class AuthController extends Controller
             $this->errors['first_name'] = "Le prénom est requis";
         }
         if(empty($lastName)){
-            $this->errors['last_name'] = "Le prénom est requis";
+            $this->errors['last_name'] = "Le nom est requis";
         }
         if(empty($email)){
             $this->errors['email'] ="L'email est requis";
@@ -45,7 +67,7 @@ class AuthController extends Controller
             }
         }
         else{
-$this->errors['email'] = "L'email n'est pas valide";
+            $this->errors['email'] = "L'email n'est pas valide";
            
         }
         if(empty($password)){
@@ -59,29 +81,9 @@ $this->errors['email'] = "L'email n'est pas valide";
                 $this->errors['password'] ="Les mots de passe ne correspondent pas";
             }
         }
-        if(!empty($this->errors)){
-            $_SESSION['register_errors']=$this->errors;
-            return  redirectTo("/inscription");
-        }
-        if(empty($this->errors)){
 
-            $user = new StdClass();
-           
-            // encrypt password
-            $user->password = password_hash($password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
-
-            // fill user with data
-            $user->first_name = $firstName;
-            $user->last_name = $lastName;
-            $user->email = $email;
-
-            if($this->getModel('AuthModel')->saveUser($user) === true) {
-                redirectTo("/");
-                debug(redirectTo("/"));die();
-            }
-           
-            
-        }
+        return  $this->errors;
+        
         
     }
     public function validateLoginForm(){
