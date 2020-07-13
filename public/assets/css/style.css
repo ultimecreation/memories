@@ -8,20 +8,148 @@
 .container {
   max-width: 1180px;
   margin: 0 auto;
+  padding: 1rem;
+}
+
+.alert-success {
+  background: #475097;
+  color: #f9f9f9;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.alert-danger {
+  background: #D8545A;
+  color: #f9f9f9;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1rem;
 }
 
 body #main__nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 1rem 0;
+  background: #7A3C92;
+  color: #f9f9f9;
 }
 
 body #main__nav .logo {
   width: 250px;
+  margin-left: 2rem;
+}
+
+body #main__nav #hamburger {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  right: 2rem;
+  cursor: pointer;
+}
+
+body #main__nav #hamburger span {
+  width: 100%;
+  height: 4px;
+  background: #f9f9f9;
+}
+
+@media (min-width: 600px) {
+  body #main__nav #hamburger {
+    display: none;
+  }
+}
+
+body #main__nav nav {
+  position: absolute;
+  top: 68px;
+  right: -2000px;
+  width: 300px;
+  height: 100%;
+  background: #7A3C92;
+}
+
+body #main__nav nav.open {
+  -webkit-animation: 1s linear slideIn forwards;
+          animation: 1s linear slideIn forwards;
+}
+
+body #main__nav nav.close {
+  -webkit-animation: 1s linear slideOut forwards;
+          animation: 1s linear slideOut forwards;
+}
+
+body #main__nav nav ul {
+  list-style: none;
+}
+
+body #main__nav nav ul li {
+  padding: 0.5rem 1rem;
+}
+
+body #main__nav nav ul li a {
+  color: #f9f9f9;
+  text-decoration: none;
+}
+
+@-webkit-keyframes slideIn {
+  from {
+    right: -2000px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    right: -2000px;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@-webkit-keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -2000px;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    right: 0;
+  }
+  to {
+    right: -2000px;
+  }
 }
 
 @media (min-width: 600px) {
   body #main__nav nav {
+    position: relative;
+    right: 0;
+    padding: 1rem auto;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -39,13 +167,23 @@ body #main__nav .logo {
         -ms-flex-direction: row;
             flex-direction: row;
     list-style: none;
+    margin-right: 2rem;
   }
   body #main__nav nav ul li {
     padding: 0.5rem 1rem;
   }
+  body #main__nav nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+body form {
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 body form .form-group p.danger {
-  color: red;
+  color: #D8545A;
 }
 /*# sourceMappingURL=style.css.map */

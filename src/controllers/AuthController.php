@@ -5,12 +5,6 @@ class AuthController extends Controller
 
     public function register()
     {
-       
-        /* if($_SESSION['register_errors'] != null){
-            $data['errors'] = $_SESSION['register_errors'];
-            $_SESSION['register_errors']=null;
-            return $this->renderView('auth/register',$data);
-        } */
         if($_SERVER['REQUEST_METHOD']==='POST'){
             // todo set $user
             $user = $this->bindUser($_POST);
@@ -37,33 +31,40 @@ class AuthController extends Controller
     public function login()
     {
     
-    if($_SERVER['REQUEST_METHOD']==='POST'){
-        // todo set $user
-        $user = $this->bindUser($_POST);
-        $this->validateLoginForm($user);
-      
-        if(!empty($this->errors)){
-           $data['errors'] = $this->errors;
-           return $this->renderView('auth/login',$data);
-        }
-        if(empty($this->errors)){
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            // todo set $user
+            $user = $this->bindUser($_POST);
+            $this->validateLoginForm($user);
         
-            $storedUser = $this->getModel("AuthModel")->getUserByEmail($user->email);  
+            if(!empty($this->errors)){
+            $data['errors'] = $this->errors;
+            return $this->renderView('auth/login',$data);
+            }
+            if(empty($this->errors)){
+            
+                $storedUser = $this->getModel("AuthModel")->getUserByEmail($user->email);  
 
-            if(!password_verify($user->password,$storedUser->password)){
-                setFlashMessage('danger',"Les identifiants ne correspondent pas à un utilisateur");
-                return $this->renderView('auth/login',);
-            }
-            else{
-                setUserData($user);
-                $_SESSION['flash']['success']="Connexion réussie";
-                return redirectTo("/"); 
-            }
-              
-        }  
+                if(!password_verify($user->password,$storedUser->password)){
+                    setFlashMessage('danger',"Les identifiants ne correspondent pas à un utilisateur");
+                    return $this->renderView('auth/login',);
+                }
+                else{
+                    setUserData($user);
+                    $_SESSION['flash']['success']="Connexion réussie";
+                    return redirectTo("/"); 
+                }
+                
+            }  
+        }
+        return $this->renderView('auth/login');
     }
-    
-   return $this->renderView('auth/login');
+    public function logout()
+    {
+        userLogoutRequest();
+        $_SESSION['flash']['success']="Déconnexion réussie";
+        return redirectTo("/"); 
+
+        
     }
     public function validateRegisterForm($user){
        

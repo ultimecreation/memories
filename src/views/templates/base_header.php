@@ -1,6 +1,7 @@
 <?php 
 startSession();
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -14,7 +15,6 @@ startSession();
 
 <body>
     <?php include_once('../src/views/inc/navbar.php'); ?>
-    <?php include_once('../src/views/inc/flash_messages.php'); ?>
-    
-
-   
+    <div class="container">
+        <?php include_once('../src/views/inc/flash_messages.php'); ?>
+    </div>

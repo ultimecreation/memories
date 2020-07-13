@@ -24,10 +24,9 @@ class Routes
             array('url' => '/retest/update', 'method' => 'PUT', 'goto' =>  array('RetestController', 'update')),
             array('url' => '/retest/delete', 'method' => 'DELETE', 'goto' =>  array('RetestController', 'delete')),
 
-            array('url' => '/inscription', 'method' => 'GET', 'goto' =>  array('AuthController', 'register')),
-            array('url' => '/validate-register-form', 'method' => 'POST', 'goto' =>  array('AuthController', 'validateRegisterForm')),
-            array('url' => '/validate-login-form', 'method' => 'POST', 'goto' =>  array('AuthController', 'validateLoginForm')),
-            array('url' => '/connexion', 'method' => 'GET', 'goto' =>  array('AuthController', 'login')),
+            array('url' => '/inscription', 'goto' =>  array('AuthController', 'register')),
+            array('url' => '/connexion', 'goto' =>  array('AuthController', 'login')),
+            array('url' => '/deconnexion', 'goto' =>  array('AuthController', 'logout')),
 
             array('url' => '/db-setup', 'method' => 'GET', 'goto' =>  array('DbSetupController', 'index')),
           
