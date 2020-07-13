@@ -21,12 +21,12 @@ function userLogoutRequest()
     unset($_SESSION['user_logged']);
 }
 function startSession(){
-    if (session_status() == PHP_SESSION_NONE) {
+    if (session_status() === PHP_SESSION_NONE) {
         session_start();
     }
-   debug(array($_SESSION));
+   
     
 }
 function setFlashMessage($type,$message){
-    $_SESSION['messages'] = array($type=>$message);
+    $_SESSION['messages'][$type] = $message;
 }

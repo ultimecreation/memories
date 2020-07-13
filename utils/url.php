@@ -11,7 +11,7 @@ function redirectTo($endPath=null,$data=null)
 {
     $path = siteUrl($endPath,$data);
 
-    header("Location: {$path}");
+    header("Location: $path");
 }
 function getUriParts($num = null)
 {

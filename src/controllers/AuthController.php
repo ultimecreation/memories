@@ -56,8 +56,8 @@ class AuthController extends Controller
             }
             else{
                 setUserData($user);
-                setFlashMessage('success',"Connexion réussie");
-                redirectTo("/");
+                $_SESSION['flash']['success']="Connexion réussie";
+                return redirectTo("/"); 
             }
               
         }  

@@ -1,4 +1,6 @@
-<?php startSession();?><!DOCTYPE html>
+<?php 
+startSession();
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,9 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="<?php echo publicUrl('/assets/css/');?>style.css">
+    <script src="<?php echo publicUrl('/assets/js/');?>main.js" defer></script>
     <title></title>
 </head>
 
 <body>
     <?php include_once('../src/views/inc/navbar.php'); ?>
     <?php include_once('../src/views/inc/flash_messages.php'); ?>
+    
+
+   
