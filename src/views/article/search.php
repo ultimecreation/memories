@@ -3,7 +3,9 @@
         <h1><?php echo $data['count'];?> Résultats pour <?php echo $data['term'];?></h1>
         <?php elseif($data['count']==1):?>
             <h1><?php echo $data['count'];?> Résultat pour <?php echo $data['term'];?></h1>
-    
+    <?php else:?>
+            <h1><?php echo $data['count'];?> Résultat pour <?php echo $data['term'];?></h1>
+        <?php endif;?>
     <section id="articles">
         
 
@@ -35,8 +37,6 @@
         <?php else:?>
         <p class="no-articles">Pas d'articles à afficher</p>
         <?php endif;?>
-        <?php else:?>
-            <h1><?php echo $data['count'];?> Résultat pour <?php echo $data['term'];?></h1>
-        <?php endif;?>
+        
     </section>
 </div>

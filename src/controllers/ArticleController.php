@@ -32,7 +32,7 @@ class ArticleController extends Controller{
         $data['articles'] = $articles;
         $data['term'] = $term;
         $data['count'] = count($articles);
-        debug($articles);
+       
         return $this->renderView('article/search',$data);
     }
 }
