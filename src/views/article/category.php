@@ -1,5 +1,7 @@
 <div class="container">
-    <h1>Blog</h1>
+<h1>
+            <a href="<?php echo siteUrl('/blog');?>">Blog</a> / <?php echo $data['cat_name'];?>
+        </h1>
     <section id="articles">
         
 
@@ -8,7 +10,7 @@
         <article class="article">
             <header class="article__header">
                 <h2><a href="<?php echo siteUrl('/blog/article/').$article->article_id;?>"><?php echo $article->title;?></a></h2>
-                <span><a href="<?php echo siteUrl('/blog/categorie/').$article->category_id;?>"><?php echo $article->cat_name;?></a></span>
+                <span><a href="<?php echo siteUrl('/blog/categorie/').$data['article']->category_id;?>"><?php echo $article->cat_name;?></a></span>
             </header>
             <div class="article__body">
                 <p><?php echo $article->content;?></p>

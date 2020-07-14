@@ -22,6 +22,7 @@ $white: #f9f9f9;
 // GENERAL
 h1,h2,h3,h4,h5,h6{
     line-height: 0.95;
+    color:$primary;
 }
 p{
     line-height: 1.5;
@@ -30,6 +31,12 @@ p{
     max-width:1180px;
     margin: 0 auto;
     padding: 1rem;
+    h1{
+               
+        a{
+         text-decoration: none;
+        }
+    }
     
 }
 .alert-success{
@@ -55,6 +62,11 @@ body{
         .logo{
             width:250px;
             margin-left: 2rem;
+           
+                h1{
+                    color:$white;
+                }
+           
         }
         #hamburger{
             width: 2rem;
@@ -116,8 +128,8 @@ body{
             }
         }
     }
-    #articles{
-        
+    #articles,#article{
+       
         .article{
             margin: 2.5rem 0;
             padding: 1rem;
@@ -127,7 +139,7 @@ body{
             &__header{
                 position: relative;
                a{
-                   text-decoration: none;
+                text-decoration: none;
                    color:$primary;
                }
                 span{
@@ -136,8 +148,14 @@ body{
                     right:0;
                     background: $primary;
                     padding: 0.25rem 0.5rem;
-                    text-transform: uppercase;
-                    color:$white; @include boxShadow(5px,rgba(122, 60, 146,0.5));
+                   
+                       a{
+                        text-transform: uppercase;
+                        text-decoration: none;
+                        color:$white;
+                         @include boxShadow(5px,rgba(122, 60, 146,0.5));
+                       }
+                   
                 }
             }
             &__body{

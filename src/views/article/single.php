@@ -1,13 +1,16 @@
 <div class="container">
-    <section id="articles">
-        <h1>Blog</h1>
+<?php if($data['article']):?>
+        <h1>
+            <a href="<?php echo siteUrl('/blog');?>">Blog</a> / <?php echo $data['article']->title;?>
+        </h1>
+    <section id="article">
+        
 
-        <?php if($data['article']):?>
         
         <article class="article">
             <header class="article__header">
-                <h2><?php echo $data['article']->title;?></h2>
-                <span><?php echo $data['article']->cat_name;?></span>
+                
+            <span><a href="<?php echo siteUrl('/blog/categorie/').$data['article']->category_id;?>"><?php echo $data['article']->cat_name;?></a></span>
             </header>
             <div class="article__body">
                 <p><?php echo $data['article']->content;?></p>
