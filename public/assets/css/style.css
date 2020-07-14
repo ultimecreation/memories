@@ -80,20 +80,12 @@ body #main__nav #hamburger span {
 body #main__nav nav {
   position: absolute;
   top: 68px;
-  right: -2000px;
+  left: -300px;
   width: 300px;
   height: 100%;
   background: #7A3C92;
-}
-
-body #main__nav nav.open {
-  -webkit-animation: 1s linear slideIn forwards;
-          animation: 1s linear slideIn forwards;
-}
-
-body #main__nav nav.close {
-  -webkit-animation: 1s linear slideOut forwards;
-          animation: 1s linear slideOut forwards;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 body #main__nav nav ul {
@@ -109,46 +101,9 @@ body #main__nav nav ul li a {
   text-decoration: none;
 }
 
-@-webkit-keyframes slideIn {
-  from {
-    right: -2000px;
-  }
-  to {
-    right: 0;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    right: -2000px;
-  }
-  to {
-    right: 0;
-  }
-}
-
-@-webkit-keyframes slideOut {
-  from {
-    right: 0;
-  }
-  to {
-    right: -2000px;
-  }
-}
-
-@keyframes slideOut {
-  from {
-    right: 0;
-  }
-  to {
-    right: -2000px;
-  }
-}
-
 @media (min-width: 600px) {
   body #main__nav nav {
-    position: relative;
-    right: 0;
+    position: static;
     padding: 1rem auto;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -181,6 +136,25 @@ body #main__nav nav ul li a {
 body form {
   max-width: 300px;
   margin: 0 auto;
+}
+
+body form button[type="submit"] {
+  background: #7A3C92;
+  color: #f9f9f9;
+  padding: 0.35rem 1rem;
+  border: none;
+  cursor: pointer;
+  height: 1.8rem;
+}
+
+body form .form-group {
+  margin: 1rem 0;
+}
+
+body form .form-group .form-control {
+  width: 100%;
+  margin-top: 0.25rem;
+  height: 1.8rem;
 }
 
 body form .form-group p.danger {

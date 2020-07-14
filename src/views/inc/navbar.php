@@ -2,7 +2,7 @@
     <div class="logo">
         <h1>My - Website</h1>
     </div>
-    <nav class="close">
+    <nav  >
 
         <ul >
             <li><a href="<?php echo siteUrl();?>/">Accueil</a></li>

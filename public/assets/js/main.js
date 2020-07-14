@@ -1,20 +1,8 @@
 window.addEventListener('DOMContentLoaded',()=>{
-    const hamburger = document.querySelector('#hamburger')
-    
-    hamburger.addEventListener('click',()=>{
-        let responsiveNav = document.querySelector('#main__nav nav')
+    const menuBtn = document.querySelector('#hamburger')
+    const responsiveNav = document.querySelector('#main__nav nav')
+    menuBtn.addEventListener('click',()=>{
+        responsiveNav.style.left = responsiveNav.style.left=="0px"?responsiveNav.style.left="-300px" :responsiveNav.style.left="0px"
         
-        if(responsiveNav.classList.contains("close")){
-            responsiveNav.classList.remove("close");
-            responsiveNav.classList.add("open"); 
-        }else{
-            if(responsiveNav.classList.contains("open")){
-                responsiveNav.classList.remove("open");
-                responsiveNav.classList.add("close")
-               
-            }
-        }
-        
-        console.log(responsiveNav)
     })
 })

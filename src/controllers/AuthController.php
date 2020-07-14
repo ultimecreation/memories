@@ -17,11 +17,11 @@ class AuthController extends Controller
             if(empty($this->errors)){
                 
                  // encrypt password
-                 $user->password = password_hash($password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
+                 $user->password = password_hash($user->password_confirm,PASSWORD_BCRYPT,['cost'=>13]);
                 
                 if($this->getModel('AuthModel')->saveUser($user) === true) {
                     setFlashMessage('success',"Inscription réussie");
-                    redirectTo("/");
+                   return redirectTo("/");
                 }
             }  
         }
@@ -37,8 +37,8 @@ class AuthController extends Controller
             $this->validateLoginForm($user);
         
             if(!empty($this->errors)){
-            $data['errors'] = $this->errors;
-            return $this->renderView('auth/login',$data);
+                $data['errors'] = $this->errors;
+                return $this->renderView('auth/login',$data);
             }
             if(empty($this->errors)){
             
@@ -46,11 +46,11 @@ class AuthController extends Controller
 
                 if(!password_verify($user->password,$storedUser->password)){
                     setFlashMessage('danger',"Les identifiants ne correspondent pas à un utilisateur");
-                    return $this->renderView('auth/login',);
+                    return $this->renderView('auth/login');
                 }
                 else{
                     setUserData($user);
-                    $_SESSION['flash']['success']="Connexion réussie";
+                    setFlashMessage('success',"Connexion réussie");
                     return redirectTo("/"); 
                 }
                 

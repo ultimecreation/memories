@@ -28,5 +28,5 @@ function startSession(){
     
 }
 function setFlashMessage($type,$message){
-    $_SESSION['messages'][$type] = $message;
+    $_SESSION['flash'][$type]=$message;
 }

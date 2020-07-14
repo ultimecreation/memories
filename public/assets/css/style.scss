@@ -71,53 +71,28 @@ body{
         nav{
             position: absolute;
             top:68px;
-            right: -2000px;
-            width:300px;
-            
+            left: -300px;   
+            width:300px;         
             height: 100%; 
             background: $primary;
-            &.open{
-                animation:  1s linear slideIn forwards;
-            }
-            &.close{
- animation:  1s linear slideOut forwards;
-            }
+            transition: 0.3s;
             ul{
                 list-style: none;
-
                 li{ 
                     padding:  0.5rem 1rem;
                     a{
                         color:$white;
                         text-decoration: none;
-                       
                     }
                 }
             }
-            @keyframes slideIn{
-                from{
-                    right: -2000px;
-                }to{
-                    right: 0;
-                  
-                }
-            }
-            @keyframes slideOut{
-                from{
-                   right:0;
-                 
-                }to{
-                     right: -2000px;
-                }
-            }
+            
             @media(min-width:600px){
-                position: relative;
-                right: 0;
+                position: static;
                 padding: 1rem auto;
                 display: flex;
                 justify-content: space-between;
                 width:100%;
-    
                 ul{
                     display: flex;
                     flex-direction:row;
@@ -137,9 +112,23 @@ body{
     
     form{
         max-width:300px;
-        margin: 0 auto;
+        margin: 0 auto; 
+        button[type="submit"]{
+                background: $primary;
+                color:$white;
+                padding: 0.35rem 1rem;
+                border:none;
+                cursor: pointer;
+                height: 1.8rem;
+            }
         .form-group{
-
+            margin: 1rem 0;
+            .form-control{
+                width:100%;
+                margin-top: 0.25rem;
+                height: 1.8rem;
+            }
+           
             p.danger{
                 color: $danger;
             }
