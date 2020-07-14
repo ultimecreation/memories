@@ -49,4 +49,21 @@ class ArticleModel extends Model{
         $req->execute(array($category_id));
         return $res = $req->fetchAll();
     }
+
+    public function getArticlesBySearchQuery($term){
+        $req = $this->bdd->prepare("
+            SELECT 
+                articles.id AS article_id,title,content,articles.created_at AS article_created_at,
+                categories.name AS cat_name,
+                CONCAT(first_name,' ',last_name) AS author_name,
+                email
+            FROM articles
+            JOIN categories ON categories.id=articles.category_id
+            JOIN users ON users.id=articles.author_id
+                WHERE articles.title LIKE :needle OR articles.content LIKE :needle
+        ");
+       
+        $req->execute(array(':needle' => "%$term%"));
+        return $res = $req->fetchAll();
+    }
 }

@@ -24,4 +24,15 @@ class ArticleController extends Controller{
         $data['cat_name'] = $articles[0]->cat_name;
         return $this->renderView('article/category',$data);
     }
+
+    public function getArticlesBySearchQuery(){
+       
+        $term = htmlspecialchars(strip_tags($_GET['terme']));
+        $articles = $this->getModel('ArticleModel')->getArticlesBySearchQuery($term);
+        $data['articles'] = $articles;
+        $data['term'] = $term;
+        $data['count'] = count($articles);
+        debug($articles);
+        return $this->renderView('article/search',$data);
+    }
 }

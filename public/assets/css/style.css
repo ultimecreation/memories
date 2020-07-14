@@ -53,6 +53,9 @@ body #main__nav {
   padding: 1rem 0;
   background: #7a3c92;
   color: #f9f9f9;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
 }
 
 body #main__nav .logo {
@@ -96,9 +99,9 @@ body #main__nav #hamburger span {
 
 body #main__nav nav {
   position: absolute;
-  top: 68px;
+  top: 63px;
   left: -300px;
-  width: 300px;
+  width: 202px;
   height: 100%;
   background: #7a3c92;
   -webkit-transition: 0.3s;
@@ -116,6 +119,25 @@ body #main__nav nav ul li {
 body #main__nav nav ul li a {
   color: #f9f9f9;
   text-decoration: none;
+}
+
+body #main__nav nav form {
+  position: relative;
+  top: -0.25rem;
+}
+
+body #main__nav nav form input {
+  border: 1px solid #f9f9f9;
+  height: 2rem;
+}
+
+body #main__nav nav form button {
+  position: absolute;
+  bottom: 50%;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 0.1rem;
 }
 
 @media (min-width: 600px) {
@@ -152,7 +174,7 @@ body #main__nav nav ul li a {
 
 body #articles .article, body #article .article {
   margin: 2.5rem 0;
-  padding: 1rem;
+  padding: 1.5rem;
   background: #f9f9f9;
   -webkit-box-shadow: 1.25px 1.25px 5px rgba(122, 60, 146, 0.3);
           box-shadow: 1.25px 1.25px 5px rgba(122, 60, 146, 0.3);

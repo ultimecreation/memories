@@ -20,6 +20,7 @@ class Routes
             array('url' => '/blog', 'goto' =>  array('ArticleController', 'list')),
             array('url' => '/blog/article/(\d+)', 'goto' =>  array('ArticleController', 'getArticle')),
             array('url' => '/blog/categorie/(\d+)', 'goto' =>  array('ArticleController', 'getArticlesByCategory')),
+            array('url' => '/blog/recherche', 'goto' =>  array('ArticleController', 'getArticlesBySearchQuery')),
            
             array('url' => '/inscription', 'goto' =>  array('AuthController', 'register')),
             array('url' => '/connexion', 'goto' =>  array('AuthController', 'login')),
