@@ -1,11 +1,15 @@
 <?php
+
+// $data = array(
+//     'template' => 'custom'
+// );
+
+
 class HomeController extends Controller
 {
     public function index()
     {
-        $data = array(
-            'template' => 'custom'
-        );
-        return $this->renderView('home/index');
+       
+        return $this->renderView('pages/index');
     }
 }

@@ -1,5 +1,5 @@
 // VARIABLES
-$primary: #7A3C92;
+$primary: rgb(122, 60, 146);
 $success:#475097;
 $danger:#D8545A;
 $white: #f9f9f9;
@@ -16,9 +16,16 @@ $white: #f9f9f9;
     text-align: center;
     margin-top: 1rem;
 }
-
+@mixin boxShadow($blur,$color){
+    box-shadow: 1.25px 1.25px $blur $color ;
+}
 // GENERAL
-
+h1,h2,h3,h4,h5,h6{
+    line-height: 0.95;
+}
+p{
+    line-height: 1.5;
+}
 .container{
     max-width:1180px;
     margin: 0 auto;
@@ -107,6 +114,39 @@ body{
                     }
                 }
             }
+        }
+    }
+    #articles{
+        
+        .article{
+            margin: 2.5rem 0;
+            padding: 1rem;
+            background: $white;
+            @include boxShadow(5px,rgba(122, 60, 146,0.3));
+           
+            &__header{
+                position: relative;
+               a{
+                   text-decoration: none;
+                   color:$primary;
+               }
+                span{
+                    position: absolute;
+                    top:-2rem;
+                    right:0;
+                    background: $primary;
+                    padding: 0.25rem 0.5rem;
+                    text-transform: uppercase;
+                    color:$white; @include boxShadow(5px,rgba(122, 60, 146,0.5));
+                }
+            }
+            &__body{
+                margin: 1rem auto;
+            }
+        }
+        .no-articles{
+            padding: 1rem;
+            text-align: center;
         }
     }
     

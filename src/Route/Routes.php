@@ -17,20 +17,16 @@ class Routes
          * array('url' => '/retest/delete', 'method' => 'DELETE', 'goto' =>  array('RetestController', 'delete')),
          */
         return [
-            array('url' => '/retest/index', 'method' => 'GET', 'goto' =>  array('RetestController', 'index')),
-            array('url' => '/retest/create', 'method' => 'GET', 'goto' =>  array('RetestController', 'create')),
-            array('url' => '/retest/save', 'method' => 'POST', 'goto' =>  array('RetestController', 'save')),
-            array('url' => '/retest/edit', 'method' => 'GET', 'goto' =>  array('RetestController', 'index')),
-            array('url' => '/retest/update', 'method' => 'PUT', 'goto' =>  array('RetestController', 'update')),
-            array('url' => '/retest/delete', 'method' => 'DELETE', 'goto' =>  array('RetestController', 'delete')),
-
+            array('url' => '/blog', 'goto' =>  array('ArticleController', 'list')),
+            array('url' => '/blog/article/(\d+)', 'goto' =>  array('ArticleController', 'getArticle')),
+           
             array('url' => '/inscription', 'goto' =>  array('AuthController', 'register')),
             array('url' => '/connexion', 'goto' =>  array('AuthController', 'login')),
             array('url' => '/deconnexion', 'goto' =>  array('AuthController', 'logout')),
 
-            array('url' => '/db-setup', 'method' => 'GET', 'goto' =>  array('DbSetupController', 'index')),
+            array('url' => '/db-setup', 'goto' =>  array('DbSetupController', 'index')),
           
-            array('url' => '/', 'method' => 'GET', 'goto' =>  array('HomeController', 'index')),
+            array('url' => '/', 'goto' =>  array('HomeController', 'index')),
         ];
     }
 }
