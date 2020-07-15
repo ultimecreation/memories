@@ -26,6 +26,8 @@ class Routes
             array('url' => '/connexion', 'goto' =>  array('AuthController', 'login')),
             array('url' => '/deconnexion', 'goto' =>  array('AuthController', 'logout')),
 
+            array('url' => '/admin', 'goto' =>  array('AdminHomeController', 'index')),
+
             array('url' => '/db-setup', 'goto' =>  array('DbSetupController', 'index')),
           
             array('url' => '/', 'goto' =>  array('HomeController', 'index')),

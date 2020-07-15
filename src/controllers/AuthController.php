@@ -49,7 +49,8 @@ class AuthController extends Controller
                     return $this->renderView('auth/login');
                 }
                 else{
-                    setUserData($user);
+                   
+                    setUserData($storedUser);
                     setFlashMessage('success',"Connexion réussie");
                     return redirectTo("/"); 
                 }

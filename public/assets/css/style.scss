@@ -3,6 +3,7 @@ $primary: rgb(122, 60, 146);
 $success:#475097;
 $danger:#D8545A;
 $white: #f9f9f9;
+$dark: rgb(22, 22, 22);
 // RESET
 *{
     padding: 0;
@@ -60,7 +61,8 @@ body{
         padding:  1rem 0;
         background: $primary;
         color:$white;
-        align-items: baseline;
+        align-items: center;
+        
         .logo{
             width:250px;
             margin-left: 2rem;
@@ -100,13 +102,16 @@ body{
             ul{
                 list-style: none;
                 li{ 
+                    position: relative;
                     padding:  0.5rem 1rem;
                     a{
                         color:$white;
                         text-decoration: none;
                     }
+                   
                 }
             }
+            
             form{
                 position:relative;
                 top:-0.25rem;
@@ -127,20 +132,47 @@ body{
                 padding: 1rem auto;
                 display: flex;
                 justify-content: space-between;
-                
+              align-items: center;
                 width:100%;
                 ul{
                     display: flex;
                     flex-direction:row;
                     list-style: none;
+                    align-items: center;
                     margin-right: 2rem;
-                    li{
+                 
+                    li{ 
+                        position: relative;
                         padding: 0.5rem 1rem;
+                        
                         a{
                             color:white;
                             text-decoration: none;
                         }
+                        form{
+                            position:relative;
+                            top: 0.05rem;
+                        }
+                        & ul{
+                        display: none;
+
+                        }
+                        &:hover ul{
+                            display: block;
+                            position: absolute;
+                            background: $white;
+                            right:-4rem;
+                           
+                            top: 2.7rem;
+                            
+                            a{
+                                    color:$dark;
+                                }
+                           
+                        }
                     }
+                   
+                    
                 }
                 
             }

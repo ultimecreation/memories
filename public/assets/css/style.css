@@ -53,9 +53,7 @@ body #main__nav {
   padding: 1rem 0;
   background: #7a3c92;
   color: #f9f9f9;
-  -webkit-box-align: baseline;
-      -ms-flex-align: baseline;
-          align-items: baseline;
+  align-items: center;
 }
 
 body #main__nav .logo {
@@ -113,6 +111,7 @@ body #main__nav nav ul {
 }
 
 body #main__nav nav ul li {
+  position: relative;
   padding: 0.5rem 1rem;
 }
 
@@ -150,6 +149,9 @@ body #main__nav nav form button {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
   }
   body #main__nav nav ul {
@@ -161,14 +163,35 @@ body #main__nav nav form button {
         -ms-flex-direction: row;
             flex-direction: row;
     list-style: none;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     margin-right: 2rem;
   }
   body #main__nav nav ul li {
+    position: relative;
     padding: 0.5rem 1rem;
   }
   body #main__nav nav ul li a {
     color: white;
     text-decoration: none;
+  }
+  body #main__nav nav ul li form {
+    position: relative;
+    top: 0.05rem;
+  }
+  body #main__nav nav ul li ul {
+    display: none;
+  }
+  body #main__nav nav ul li:hover ul {
+    display: block;
+    position: absolute;
+    background: #f9f9f9;
+    right: -4rem;
+    top: 2.7rem;
+  }
+  body #main__nav nav ul li:hover ul a {
+    color: #161616;
   }
 }
 
