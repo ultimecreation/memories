@@ -1,12 +1,12 @@
 <?php
 
-class ArticleController extends Controller{
+class ArticlesController extends Controller{
 
     public function list()
     {
         $articles = $this->getModel('ArticleModel')->getAllArticles();
         $data['articles'] = $articles;
-        return $this->renderView('article/list',$data);
+        return $this->renderView('articles/list',$data);
     }
 
     public function getArticle(){
@@ -14,7 +14,7 @@ class ArticleController extends Controller{
         $article = $this->getModel('ArticleModel')->getArticleById($articleId);
         $data['article'] = $article;
        
-        return $this->renderView('article/single',$data);
+        return $this->renderView('articles/single',$data);
     }
 
     public function getArticlesByCategory(){
@@ -22,7 +22,7 @@ class ArticleController extends Controller{
         $articles = $this->getModel('ArticleModel')->getArticleByCategory($categoryId);
         $data['articles'] = $articles;
         $data['cat_name'] = $articles[0]->cat_name;
-        return $this->renderView('article/category',$data);
+        return $this->renderView('articles/category',$data);
     }
 
     public function getArticlesBySearchQuery(){
@@ -33,6 +33,6 @@ class ArticleController extends Controller{
         $data['term'] = $term;
         $data['count'] = count($articles);
        
-        return $this->renderView('article/search',$data);
+        return $this->renderView('articles/search',$data);
     }
 }

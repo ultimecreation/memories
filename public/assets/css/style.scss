@@ -211,6 +211,35 @@ body{
             &__body{
                 margin: 1rem auto;
             }
+            .article__options{
+                position: relative;
+                display: flex;
+                align-items: center;
+               a{
+                   display: block;
+                  position: absolute;
+                  left: 130px;
+                  top: 10px;
+                  padding: 0.3rem 0.5rem;
+                  text-decoration: none;
+               }
+               form{
+                  
+                   position: absolute;
+                   left: 0;
+                   top: 10px;
+               }
+                
+                .btn-info{
+                    background: $success;
+                    color:white;
+                }
+                .btn-danger{
+                    background: $danger;
+                    color:white;
+                    margin-left: 0;
+                }
+            }
         }
         .no-articles{
             padding: 1rem;
