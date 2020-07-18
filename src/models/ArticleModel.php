@@ -75,4 +75,13 @@ class ArticleModel extends Model{
         }
         return false;
     }
+    public function save($article){
+        $req = $this->bdd->prepare("
+            INSERT INTO articles
+            SET author_id=?, category_id=?, title=?, content=?
+        ");
+        $req->execute(array($article->author_id,$article->category_id,$article->title,$article->content));
+        $lastInsertId = $this->bdd->lastInsertId();
+        return $lastInsertId;
+    }
 }
