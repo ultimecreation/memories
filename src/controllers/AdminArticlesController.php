@@ -33,7 +33,11 @@ class AdminArticlesController extends Controller
        if(!in_array('ADMIN',getUserData('roles'))){
            return redirectTo('/');
        }
-        return $this->renderView('admin/articles/create');
+       $categories = $this->getModel('CategoryModel')->getCategories();
+
+       $data['categories'] = $categories;
+       
+        return $this->renderView('admin/articles/create',$data);
     }
     public function edit()
     {
@@ -42,9 +46,12 @@ class AdminArticlesController extends Controller
        }
        $articleId = intval( getUriParts(3));
         $article = $this->getModel('ArticleModel')->getArticleById($articleId);
+        $categories = $this->getModel('CategoryModel')->getCategories();
+       
         $data['article'] = $article;
-        debug($article);die();
-        return $this->renderView('admin/articles/edit');
+        $data['categories'] = $categories;
+       
+        return $this->renderView('admin/articles/edit',$data);
     }
     public function delete()
     {
@@ -52,6 +59,15 @@ class AdminArticlesController extends Controller
            return redirectTo('/');
        }
        $idToDelete = intval($_POST['idToDelete']);
+       $success = $this->getModel('ArticleModel')->deleteArticle( $idToDelete );
+
+       if($success){
+           setFlashMessage('success',"suppression réussie");
+           return redirectTo('/admin/articles');
+       }else{
+            setFlashMessage('danger',"uen erreur inattendue s'est produite");
+           return redirectTo('/admin/articles');
+       }
        debug($idToDelete);die();
         return $this->renderView('admin/articles/delete');
     }

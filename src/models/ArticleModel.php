@@ -13,6 +13,7 @@ class ArticleModel extends Model{
             FROM articles
             JOIN categories ON categories.id=articles.category_id
             JOIN users ON users.id=articles.author_id
+            ORDER BY articles.id DESC
         ");
         $req->execute();
         return $res = $req->fetchAll();
@@ -65,5 +66,13 @@ class ArticleModel extends Model{
        
         $req->execute(array(':needle' => "%$term%"));
         return $res = $req->fetchAll();
+    }
+    public function deleteArticle($id){
+        $req = $this->bdd->prepare('DELETE FROM articles WHERE id=?');
+        $res = $req->execute(array($id));
+        if($res){
+            return true;
+        }
+        return false;
     }
 }

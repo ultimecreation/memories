@@ -1,5 +1,5 @@
 <div class="container">
-    <h1>Blog</h1>
+    <h1>Articles</h1>
     <section id="articles">
         
     <a href="<?php echo siteUrl('/admin/articles/creer');?>">Créer un article</a>

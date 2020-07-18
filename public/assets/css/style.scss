@@ -263,8 +263,9 @@ body{
             .form-control{
                 width:100%;
                 margin-top: 0.25rem;
-                height: 1.8rem;
+                min-height: 1.8rem;
             }
+           
            
             p.danger{
                 color: $danger;
