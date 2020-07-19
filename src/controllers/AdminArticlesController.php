@@ -26,16 +26,18 @@ class AdminArticlesController extends Controller
        if($page<$nbOfPages){
            $pagination->next_page = $page+1??'';
        }
+       $pagination->total_pages = $nbOfPages;
        $pagination->current_page = $page;
        $data['pagination'] = $pagination;
-       debug(array(
-        'page'=>$page,
-        'perPage' => $perPage,
-        'totalNbOfArticles'=> $totalNbOfArticles,
-        'nbOfPages'=> $nbOfPages
-       ));
+    //    debug(array(
+    //     'page'=>$page,
+    //     'perPage' => $perPage,
+    //     'totalNbOfArticles'=> $totalNbOfArticles,
+    //     'nbOfPages'=> $nbOfPages
+    //    ));
       // debug(array($start,$perPage));die();
        $articles = $this->getModel('ArticleModel')->getAllArticles($start,$perPage);
+       
        $data['articles'] = $articles;
        
         return $this->renderView('admin/articles/list',$data);

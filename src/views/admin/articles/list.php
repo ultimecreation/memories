@@ -29,18 +29,18 @@
         </article>
         <?php endforeach;?>
         <?php if($data['pagination']):?>
-            <ul>
+            <ul class="pagination">
                 <li>
                     <?php if(isset($data['pagination']->previous_page)):?>
-                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->previous_page;?>">Page précédente</a>
+                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->previous_page;?>"><i class="fa fa-arrow-left"></i></a>
                     <?php endif;?>
                 </li>
                 <li>
-                    <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->current_page;?>"><?php echo $data['pagination']->current_page;?></a>
+                    <a ><?php echo "{$data['pagination']->current_page}/{$data['pagination']->total_pages}";?></a>
                     </li>
                 <li>
                     <?php if(isset($data['pagination']->next_page)):?>
-                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->next_page;?>">Page suivante</a>
+                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->next_page;?>"><i class="fa fa-arrow-right"></i></a>
                     <?php endif;?>
                 </li>
             </ul>

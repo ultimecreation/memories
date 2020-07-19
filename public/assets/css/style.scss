@@ -51,7 +51,16 @@ p{
     color:$white; 
     @include centered;
 }
-
+.pagination{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    a{
+        margin: 0 0.5rem;
+        padding: 0.25rem 0.5rem;
+        text-decoration: none;
+    }
+}
 body{
   
     #main__nav{

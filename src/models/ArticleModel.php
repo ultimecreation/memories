@@ -21,22 +21,38 @@ class ArticleModel extends Model{
         
         $req->execute();
         }else{
-            $sql = sprintf("
-            SELECT 
-                articles.id AS article_id,title,content,articles.created_at AS article_created_at,
-                categories.id as category_id,
-                categories.name AS cat_name,
-                CONCAT(first_name,' ',last_name) AS author_name,
-                email
-            FROM articles
-            JOIN categories ON categories.id=articles.category_id
-            JOIN users ON users.id=articles.author_id
-            ORDER BY articles.id DESC
-            LIMIT %d,%d
-        ",$start,$perPage);
+        //     $sql = sprintf("
+        //     SELECT 
+        //         articles.id AS article_id,title,content,articles.created_at AS article_created_at,
+        //         categories.id as category_id,
+        //         categories.name AS cat_name,
+        //         CONCAT(first_name,' ',last_name) AS author_name,
+        //         email
+        //     FROM articles
+        //     JOIN categories ON categories.id=articles.category_id
+        //     JOIN users ON users.id=articles.author_id
+        //     ORDER BY articles.id DESC
+        //     LIMIT %d,%d
+        // ",$start,$perPage);
         
-        $req = $this->bdd->query($sql);
-        $req->execute();
+        // $req = $this->bdd->query($sql);
+        // $req->execute();
+            $req = $this->bdd->prepare("
+                SELECT 
+                    articles.id AS article_id,title,content,articles.created_at AS article_created_at,
+                    categories.id as category_id,
+                    categories.name AS cat_name,
+                    CONCAT(first_name,' ',last_name) AS author_name,
+                    email
+                FROM articles
+                JOIN categories ON categories.id=articles.category_id
+                JOIN users ON users.id=articles.author_id
+                ORDER BY articles.id DESC
+                LIMIT ?,?
+            ");
+           $req->bindValue(1,$start,PDO::PARAM_INT);
+           $req->bindValue(2,$perPage,PDO::PARAM_INT);
+            $req->execute();
         }
         return $res = $req->fetchAll();
     }

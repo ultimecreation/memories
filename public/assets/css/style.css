@@ -40,6 +40,22 @@ p {
   margin-top: 1rem;
 }
 
+.pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.pagination a {
+  margin: 0 0.5rem;
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
 body #main__nav {
   display: -webkit-box;
   display: -ms-flexbox;
