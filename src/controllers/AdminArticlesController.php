@@ -68,15 +68,39 @@ class AdminArticlesController extends Controller
     }
     public function edit()
     {
-       if(!in_array('ADMIN',getUserData('roles'))){
-           return redirectTo('/');
-       }
-       $articleId = intval( getUriParts(3));
+        if(!in_array('ADMIN',getUserData('roles'))){
+            return redirectTo('/');
+        }
+        $articleId = intval( getUriParts(3));
         $article = $this->getModel('ArticleModel')->getArticleById($articleId);
         $categories = $this->getModel('CategoryModel')->getCategories();
        
         $data['article'] = $article;
         $data['categories'] = $categories;
+
+        if($_SERVER['REQUEST_METHOD']==='POST'){
+            $updatedArticle = $this->bindArticle($_POST,'update');
+            $this->validateSubmittedArticle($article);
+          
+            if(!empty($this->errors)){
+                $data['article'] = $article;
+                $data['errors'] = $this->errors;
+                return $this->renderView('admin/articles/edit',$data);
+            }
+            if(empty($this->errors)){ 
+
+                $success = $this->getModel('ArticleModel')->update($updatedArticle);
+
+                if($success){
+                    setFlashMessage('success',"article modifié avec succès");
+                    return redirectTo("/admin/articles/voir-details/{$updatedArticle->article_id}");
+                    
+                }else{
+                    setFlashMessage('danger',"une erreur inattendue est survenue");
+                    return redirectTo('/admin/articles');
+                }               
+            }
+        }
        
         return $this->renderView('admin/articles/edit',$data);
     }
@@ -112,7 +136,8 @@ class AdminArticlesController extends Controller
         }
         return $this->errors;
     }
-    public function bindArticle($array){
+    public function bindArticle($array,$context=null){
+        
         $title = htmlspecialchars(strip_tags($_POST['title'])) ?? '';
         $category_id = htmlspecialchars(strip_tags($_POST['category_id'])) ?? '';
         $content = htmlspecialchars(strip_tags($_POST['content'])) ?? '';
@@ -121,6 +146,9 @@ class AdminArticlesController extends Controller
         $article->title = $title;
         $article->category_id = $category_id;
         $article->content = $content;
+        if($context==='update'){
+            $article->article_id = htmlspecialchars(strip_tags($_POST['article_id'])) ?? '';
+        }
         return $article;
     }
 }

@@ -7,7 +7,7 @@
 
 
 
-    <form action="<?php echo siteUrl();?>/connexion" method="POST">
+    <form action="<?php echo siteUrl('/admin/articles/editer/').$data['article']->article_id;?>" method="POST">
         <?php //debug($data['errors']);?>
 
         <div class="form-group">
@@ -19,7 +19,7 @@
         </div>
         <div class="form-group">
             <label for="category">Catégorie</label>
-            <select name="category" id="category" class="form-control">
+            <select name="category_id" id="category_id" class="form-control">
                 <option value="<?php echo $data['article']->category_id;?>" selected><?php echo $data['article']->cat_name;?></option>
                 <?php  debug($data['categories']); foreach($data['categories'] as $category):?>
                     <option value="<?php echo $category->id;?>"><?php echo $category->name;?></option>
@@ -35,7 +35,7 @@
         ?>
         </div>
 
-        <input type="hidden" name="article_id" value="<?php echo $data['article_id'];?>">
+        <input type="hidden" name="article_id" value="<?php echo $data['article']->article_id;?>">
         <button type="submit">Soumettre</button>
 
     </form>
