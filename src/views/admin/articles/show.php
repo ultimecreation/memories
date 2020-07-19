@@ -10,7 +10,7 @@
         <article class="article">
             <header class="article__header">
                 <span>
-                    <?php echo $data['article']->cat_name;?>
+                    <a><?php echo $data['article']->cat_name;?></a>
                 </span>
             </header>
             <div class="article__body">

@@ -9,7 +9,7 @@
         <article class="article">
             <header class="article__header">
                 <h2><?php echo $article->title;?> | <a href="<?php echo siteUrl('/admin/articles/voir-details/').$article->article_id;?>"><small> Voir en détail <i class="fa fa-eye"></i></small></a></h2>
-                <span><a href="<?php echo siteUrl('/blog/categorie/').$article->category_id;?>"><?php echo $article->cat_name;?></a></span>
+                <span><a><?php echo $article->cat_name;?></a></span>
             </header>
             <div class="article__footer"> 
                <p>Publié par : 
