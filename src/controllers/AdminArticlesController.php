@@ -14,8 +14,28 @@ class AdminArticlesController extends Controller
        if(!in_array('ADMIN',getUserData('roles'))){
            return redirectTo('/');
        }
-
-       $articles = $this->getModel('ArticleModel')->getAllArticles();
+       $page = getUriParts(3) ?? 1;
+       $perPage = intval($_SESSION['per_page'] ?? 5);
+       $totalNbOfArticles = count($this->getModel('ArticleModel')->getAllArticles());
+       $nbOfPages = ceil($totalNbOfArticles/$perPage) ;
+       $start = intval(($page-1)*$perPage);
+       $pagination = new StdClass();
+       if($page>1){
+           $pagination->previous_page = $page-1??'';
+       }
+       if($page<$nbOfPages){
+           $pagination->next_page = $page+1??'';
+       }
+       $pagination->current_page = $page;
+       $data['pagination'] = $pagination;
+       debug(array(
+        'page'=>$page,
+        'perPage' => $perPage,
+        'totalNbOfArticles'=> $totalNbOfArticles,
+        'nbOfPages'=> $nbOfPages
+       ));
+      // debug(array($start,$perPage));die();
+       $articles = $this->getModel('ArticleModel')->getAllArticles($start,$perPage);
        $data['articles'] = $articles;
        
         return $this->renderView('admin/articles/list',$data);

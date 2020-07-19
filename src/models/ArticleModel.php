@@ -2,8 +2,10 @@
 
 class ArticleModel extends Model{
 
-    public function getAllArticles(){
-        $req = $this->bdd->query("
+    public function getAllArticles($start=null,$perPage=null){
+        // debug($start);die();
+        if($start==null && $perPage==null){
+            $req = $this->bdd->query("
             SELECT 
                 articles.id AS article_id,title,content,articles.created_at AS article_created_at,
                 categories.id as category_id,
@@ -14,8 +16,28 @@ class ArticleModel extends Model{
             JOIN categories ON categories.id=articles.category_id
             JOIN users ON users.id=articles.author_id
             ORDER BY articles.id DESC
+            
         ");
+        
         $req->execute();
+        }else{
+            $sql = sprintf("
+            SELECT 
+                articles.id AS article_id,title,content,articles.created_at AS article_created_at,
+                categories.id as category_id,
+                categories.name AS cat_name,
+                CONCAT(first_name,' ',last_name) AS author_name,
+                email
+            FROM articles
+            JOIN categories ON categories.id=articles.category_id
+            JOIN users ON users.id=articles.author_id
+            ORDER BY articles.id DESC
+            LIMIT %d,%d
+        ",$start,$perPage);
+        
+        $req = $this->bdd->query($sql);
+        $req->execute();
+        }
         return $res = $req->fetchAll();
     }
     public function getArticleById($article_id){
@@ -85,7 +107,7 @@ class ArticleModel extends Model{
         return $lastInsertId;
     }
     public function update($updatedArticle){
-        //debug($updatedArticle);die();
+        //locadebug($updatedArticle);die();
         $req = $this->bdd->prepare("
         UPDATE articles
         SET category_id=?, title=?, content=?

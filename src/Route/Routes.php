@@ -26,7 +26,7 @@ class Routes
             array('url' => '/connexion', 'goto' =>  array('AuthController', 'login')),
             array('url' => '/deconnexion', 'goto' =>  array('AuthController', 'logout')),
 
-            array('url' => '/admin/articles', 'goto' =>  array('AdminArticlesController', 'list')),
+            array('url' => '/admin/articles/page/(\d+)', 'goto' =>  array('AdminArticlesController', 'list')),
             array('url' => '/admin/articles/voir-details/(\d+)', 'goto' =>  array('AdminArticlesController', 'show')),
             array('url' => '/admin/articles/editer/(\d+)', 'goto' =>  array('AdminArticlesController', 'edit')),
             array('url' => '/admin/articles/creer', 'goto' =>  array('AdminArticlesController', 'create')),

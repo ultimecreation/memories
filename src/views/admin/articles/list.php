@@ -28,6 +28,23 @@
             </div>
         </article>
         <?php endforeach;?>
+        <?php if($data['pagination']):?>
+            <ul>
+                <li>
+                    <?php if(isset($data['pagination']->previous_page)):?>
+                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->previous_page;?>">Page précédente</a>
+                    <?php endif;?>
+                </li>
+                <li>
+                    <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->current_page;?>"><?php echo $data['pagination']->current_page;?></a>
+                    </li>
+                <li>
+                    <?php if(isset($data['pagination']->next_page)):?>
+                        <a href="<?php echo siteUrl('/admin/articles/page/').$data['pagination']->next_page;?>">Page suivante</a>
+                    <?php endif;?>
+                </li>
+            </ul>
+        <?php endif;?>
         <?php else:?>
         <p class="no-articles">Pas d'articles à afficher</p>
         <?php endif;?>
