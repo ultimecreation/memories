@@ -7,7 +7,12 @@ class Router
     protected $method = 'index';
     protected $params = [];
     protected $routes = [];
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->routes = Routes::getRoutes();
@@ -55,7 +60,14 @@ class Router
             $this->method = $this->method;
         }
         call_user_func_array(array($this->controller, $this->method), $this->params);
-    }
+    }    
+        
+        
+    /**
+     * getUrl
+     *
+     * @return void
+     */
     public function getUrl()
     {
         if (isset($_GET['url'])) {

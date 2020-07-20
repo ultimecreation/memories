@@ -2,7 +2,12 @@
 class AuthController extends Controller
 {
      public $errors = [];
-
+    
+    /**
+     * register
+     *
+     * @return void
+     */
     public function register()
     {
         if($_SERVER['REQUEST_METHOD']==='POST'){
@@ -27,7 +32,12 @@ class AuthController extends Controller
         }
         
        return $this->renderView('auth/register');
-    }
+    }    
+    /**
+     * login
+     *
+     * @return void
+     */
     public function login()
     {
     
@@ -58,7 +68,12 @@ class AuthController extends Controller
             }  
         }
         return $this->renderView('auth/login');
-    }
+    }    
+    /**
+     * logout
+     *
+     * @return void
+     */
     public function logout()
     {
         userLogoutRequest();
@@ -66,7 +81,13 @@ class AuthController extends Controller
         return redirectTo("/"); 
 
         
-    }
+    }    
+    /**
+     * validateRegisterForm
+     *
+     * @param  mixed $user
+     * @return array
+     */
     public function validateRegisterForm($user){
        
         if(empty($user->first_name)){
@@ -103,7 +124,13 @@ class AuthController extends Controller
         
         
     }
-    
+        
+    /**
+     * validateLoginForm
+     *
+     * @param  mixed $user
+     * @return array
+     */
     public function validateLoginForm($user){
         if(empty($user->email)){
             $this->errors['email'] ="L'email est requis";

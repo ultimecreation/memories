@@ -7,7 +7,12 @@ class Model
     protected $pass = DB_PASS;
     protected $error;
     protected $bdd;
-
+    
+    /**
+     * __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         try {

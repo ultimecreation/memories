@@ -61,6 +61,27 @@ p{
         text-decoration: none;
     }
 }
+.admin-summary{
+   display: flex;
+   flex-flow:row wrap;
+   justify-content: center;
+    list-style: none;
+    li{
+        min-width:280px;
+         margin: 2rem; 
+         
+      a{ 
+        box-shadow: 3px 3px 5px rgba(122, 60, 146,0.3);
+        font-size: 2rem;
+        text-decoration: none;
+        display: flex;
+        flex-flow:column ;
+        align-items: center;
+        justify-content: center;
+        color:$success;
+      }
+    }
+}
 body{
   
     #main__nav{

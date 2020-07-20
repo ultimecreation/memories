@@ -6,9 +6,16 @@
 
 
 class AdminArticlesController extends Controller
-{
-    private $errors = [];
+{    
     
+    private $errors = [];
+        
+        
+    /**
+     * list
+     *
+     * @return void
+     */
     public function list()
     {
        if(!in_array('ADMIN',getUserData('roles'))){
@@ -29,20 +36,19 @@ class AdminArticlesController extends Controller
        $pagination->total_pages = $nbOfPages;
        $pagination->current_page = $page;
        $data['pagination'] = $pagination;
-    //    debug(array(
-    //     'page'=>$page,
-    //     'perPage' => $perPage,
-    //     'totalNbOfArticles'=> $totalNbOfArticles,
-    //     'nbOfPages'=> $nbOfPages
-    //    ));
-      // debug(array($start,$perPage));die();
+    
        $articles = $this->getModel('ArticleModel')->getAllArticles($start,$perPage);
        
        $data['articles'] = $articles;
        
         return $this->renderView('admin/articles/list',$data);
     }
-
+    
+    /**
+     * show
+     *
+     * @return void
+     */
     public function show(){
         $articleId = intval( getUriParts(3));
         $article = $this->getModel('ArticleModel')->getArticleById($articleId);
@@ -50,7 +56,14 @@ class AdminArticlesController extends Controller
        
         return $this->renderView('/admin/articles/show',$data);
     }
-
+    
+        
+        
+    /**
+     * create
+     *
+     * @return void
+     */
     public function create()
     {
        if(!in_array('ADMIN',getUserData('roles'))){
@@ -87,7 +100,12 @@ class AdminArticlesController extends Controller
        }
     
        return $this->renderView('admin/articles/create',$data);
-    }
+    }    
+    /**
+     * edit
+     *
+     * @return void
+     */
     public function edit()
     {
         if(!in_array('ADMIN',getUserData('roles'))){
@@ -125,7 +143,12 @@ class AdminArticlesController extends Controller
         }
        
         return $this->renderView('admin/articles/edit',$data);
-    }
+    }    
+    /**
+     * delete
+     *
+     * @return void
+     */
     public function delete()
     {
        if(!in_array('ADMIN',getUserData('roles'))){
@@ -143,7 +166,13 @@ class AdminArticlesController extends Controller
        }
        debug($idToDelete);die();
         return $this->renderView('admin/articles/delete');
-    }
+    }    
+    /**
+     * validateSubmittedArticle
+     *
+     * @param  mixed $article
+     * @return void
+     */
     public function validateSubmittedArticle($article){
        
 
@@ -157,7 +186,14 @@ class AdminArticlesController extends Controller
             $this->errors['content'] = "Le contenu est requis";
         }
         return $this->errors;
-    }
+    }    
+    /**
+     * bindArticle
+     *
+     * @param  mixed $array
+     * @param  mixed $context
+     * @return void
+     */
     public function bindArticle($array,$context=null){
         
         $title = htmlspecialchars(strip_tags($_POST['title'])) ?? '';

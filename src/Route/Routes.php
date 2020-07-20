@@ -31,6 +31,16 @@ class Routes
             array('url' => '/admin/articles/editer/(\d+)', 'goto' =>  array('AdminArticlesController', 'edit')),
             array('url' => '/admin/articles/creer', 'goto' =>  array('AdminArticlesController', 'create')),
             array('url' => '/admin/articles/supprimer', 'goto' =>  array('AdminArticlesController', 'delete')),
+            
+            array('url' => '/admin/categories', 'goto' =>  array('AdminCategoriesController', 'list')),
+            array('url' => '/admin/categories/creer', 'goto' =>  array('AdminCategoriesController', 'create')),
+            array('url' => '/admin/categories/editer/(\d+)', 'goto' =>  array('AdminCategoriesController', 'edit')),
+            array('url' => '/admin/categories/supprimer', 'goto' =>  array('AdminCategoriesController', 'delete')),
+            
+            array('url' => '/admin/utilisateurs/page/(\d+)', 'goto' =>  array('AdminUsersController', 'list')),
+            array('url' => '/admin/utilisateurs/voir-details/(\d+)', 'goto' =>  array('AdminUsersController', 'show')),
+            array('url' => '/admin/utilisateurs/editer/(\d+)', 'goto' =>  array('AdminUsersController', 'edit')),
+            array('url' => '/admin/utilisateurs/supprimer', 'goto' =>  array('AdminUsersController', 'delete')),
 
             array('url' => '/admin', 'goto' =>  array('AdminHomeController', 'index')),
             array('url' => '/db-setup', 'goto' =>  array('DbSetupController', 'index')),

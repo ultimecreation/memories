@@ -1,7 +1,7 @@
 <div class="container">
     <?php if($data['article']):?>
     <h1>
-        <a href="<?php echo siteUrl('/admin/articles');?>">Articles</a> / <?php echo $data['article']->title;?>
+        <a href="<?php echo siteUrl('/admin/articles/page/1');?>">Articles</a> / <?php echo $data['article']->title;?>
     </h1>
     <section id="article">
 

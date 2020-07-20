@@ -1,9 +1,15 @@
 <?php
 
 class ArticleModel extends Model{
-
+    
+    /**
+     * getAllArticles
+     *
+     * @param  mixed $start
+     * @param  mixed $perPage
+     * @return object
+     */
     public function getAllArticles($start=null,$perPage=null){
-        // debug($start);die();
         if($start==null && $perPage==null){
             $req = $this->bdd->query("
             SELECT 
@@ -21,22 +27,6 @@ class ArticleModel extends Model{
         
         $req->execute();
         }else{
-        //     $sql = sprintf("
-        //     SELECT 
-        //         articles.id AS article_id,title,content,articles.created_at AS article_created_at,
-        //         categories.id as category_id,
-        //         categories.name AS cat_name,
-        //         CONCAT(first_name,' ',last_name) AS author_name,
-        //         email
-        //     FROM articles
-        //     JOIN categories ON categories.id=articles.category_id
-        //     JOIN users ON users.id=articles.author_id
-        //     ORDER BY articles.id DESC
-        //     LIMIT %d,%d
-        // ",$start,$perPage);
-        
-        // $req = $this->bdd->query($sql);
-        // $req->execute();
             $req = $this->bdd->prepare("
                 SELECT 
                     articles.id AS article_id,title,content,articles.created_at AS article_created_at,
@@ -55,7 +45,13 @@ class ArticleModel extends Model{
             $req->execute();
         }
         return $res = $req->fetchAll();
-    }
+    }    
+    /**
+     * getArticleById
+     *
+     * @param  mixed $article_id
+     * @return object
+     */
     public function getArticleById($article_id){
         $req = $this->bdd->prepare("
             SELECT 
@@ -72,7 +68,13 @@ class ArticleModel extends Model{
         $req->execute(array($article_id));
         return $res = $req->fetch();
     }
-
+    
+    /**
+     * getArticleByCategory
+     *
+     * @param  mixed $category_id
+     * @return void
+     */
     public function getArticleByCategory($category_id){
         $req = $this->bdd->prepare("
             SELECT 
@@ -88,7 +90,13 @@ class ArticleModel extends Model{
         $req->execute(array($category_id));
         return $res = $req->fetchAll();
     }
-
+    
+    /**
+     * getArticlesBySearchQuery
+     *
+     * @param  mixed $term
+     * @return object
+     */
     public function getArticlesBySearchQuery($term){
         $req = $this->bdd->prepare("
             SELECT 
@@ -104,7 +112,13 @@ class ArticleModel extends Model{
        
         $req->execute(array(':needle' => "%$term%"));
         return $res = $req->fetchAll();
-    }
+    }    
+    /**
+     * deleteArticle
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function deleteArticle($id){
         $req = $this->bdd->prepare('DELETE FROM articles WHERE id=?');
         $res = $req->execute(array($id));
@@ -112,7 +126,13 @@ class ArticleModel extends Model{
             return true;
         }
         return false;
-    }
+    }    
+    /**
+     * save
+     *
+     * @param  mixed $article
+     * @return void
+     */
     public function save($article){
         $req = $this->bdd->prepare("
             INSERT INTO articles
@@ -121,7 +141,13 @@ class ArticleModel extends Model{
         $req->execute(array($article->author_id,$article->category_id,$article->title,$article->content));
         $lastInsertId = $this->bdd->lastInsertId();
         return $lastInsertId;
-    }
+    }    
+    /**
+     * update
+     *
+     * @param  mixed $updatedArticle
+     * @return void
+     */
     public function update($updatedArticle){
         //locadebug($updatedArticle);die();
         $req = $this->bdd->prepare("

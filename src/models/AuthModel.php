@@ -1,12 +1,24 @@
 <?php
 class AuthModel extends Model
-{
+{    
+    /**
+     * isEmailTaken
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function isEmailTaken($email)
     {
         $req = $this->bdd->prepare('select * from users WHERE email=?');
         $req->execute(array($email));
         return $req->fetch();
-    }
+    }    
+    /**
+     * saveUser
+     *
+     * @param  mixed $user
+     * @return void
+     */
     public function saveUser($user){
         try{
             $this->bdd->beginTransaction();
@@ -27,7 +39,13 @@ class AuthModel extends Model
             return $e->getMessage();
         }
     }
-
+    
+    /**
+     * getUserByEmail
+     *
+     * @param  mixed $email
+     * @return void
+     */
     public function getUserByEmail($email){
         $req = $this->bdd->prepare("SELECT id,first_name,last_name,email,password FROM users WHERE email=?");
         $req->execute(array($email));

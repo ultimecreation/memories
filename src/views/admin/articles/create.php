@@ -1,7 +1,7 @@
 <div class="container">
     
     <h1>
-        <a href="<?php echo siteUrl('/admin/articles');?>">Articles</a> / Créer
+        <a href="<?php echo siteUrl('/admin/articles/page/1');?>">Articles</a> / Créer
     </h1>
     <section id="article-form">
 

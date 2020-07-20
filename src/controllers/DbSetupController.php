@@ -8,7 +8,13 @@ class DbSetupController extends Controller
         
 
 
-        // create PDO connection
+        // create PDO connection        
+        /**
+         * getConnection
+         *
+         * @param  mixed $dbName
+         * @return object 
+         */
         function getConnection($dbName = null)
         {
             try {

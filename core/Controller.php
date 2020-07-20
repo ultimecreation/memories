@@ -6,17 +6,39 @@ class Controller
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-    }
+    }    
+    /**
+     * setFlash
+     *
+     * @param  mixed $field
+     * @param  mixed $class
+     * @param  mixed $msg_id
+     * @param  mixed $message
+     * @return void
+     */
     public function setFlash($field, $class, $msg_id, $message)
     {
         $_SESSION[$field][$class][$msg_id] = $message;
-    }
+    }    
+    /**
+     * getModel
+     *
+     * @param  mixed $model
+     * @return void
+     */
     public function getModel($model)
     {
         require_once("../src/Models/{$model}.php");
         return new $model;
     }
-
+       
+    /**
+     *  renderView
+     *
+     * @param  mixed $content
+     * @param  mixed $data
+     * @return void
+     */
     public function renderView($content, $data=null)
     {
         // load content
