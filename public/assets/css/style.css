@@ -15,7 +15,7 @@ p {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 1rem;
 }
@@ -251,7 +251,7 @@ body #main__nav nav form button {
   }
 }
 
-body #articles .article, body #article .article {
+body #articles .article, body #articles .user, body #article .article, body #article .user, body #users .article, body #users .user {
   margin: 2.5rem 0;
   padding: 1.5rem;
   background: #f9f9f9;
@@ -259,16 +259,16 @@ body #articles .article, body #article .article {
           box-shadow: 1.25px 1.25px 5px rgba(122, 60, 146, 0.3);
 }
 
-body #articles .article__header, body #article .article__header {
+body #articles .article__header, body #articles .user__header, body #article .article__header, body #article .user__header, body #users .article__header, body #users .user__header {
   position: relative;
 }
 
-body #articles .article__header a, body #article .article__header a {
+body #articles .article__header a, body #articles .user__header a, body #article .article__header a, body #article .user__header a, body #users .article__header a, body #users .user__header a {
   text-decoration: none;
   color: #7a3c92;
 }
 
-body #articles .article__header span, body #article .article__header span {
+body #articles .article__header span, body #articles .user__header span, body #article .article__header span, body #article .user__header span, body #users .article__header span, body #users .user__header span {
   position: absolute;
   top: -2rem;
   right: 0;
@@ -276,7 +276,7 @@ body #articles .article__header span, body #article .article__header span {
   padding: 0.25rem 0.5rem;
 }
 
-body #articles .article__header span a, body #article .article__header span a {
+body #articles .article__header span a, body #articles .user__header span a, body #article .article__header span a, body #article .user__header span a, body #users .article__header span a, body #users .user__header span a {
   text-transform: uppercase;
   text-decoration: none;
   color: #f9f9f9;
@@ -284,11 +284,15 @@ body #articles .article__header span a, body #article .article__header span a {
           box-shadow: 1.25px 1.25px 5px rgba(122, 60, 146, 0.5);
 }
 
-body #articles .article__body, body #article .article__body {
+body #articles .article__body, body #articles .user__body, body #article .article__body, body #article .user__body, body #users .article__body, body #users .user__body {
   margin: 1rem auto;
 }
 
-body #articles .article .article__options, body #article .article .article__options {
+body #articles .article .user__footer, body #articles .user .user__footer, body #article .article .user__footer, body #article .user .user__footer, body #users .article .user__footer, body #users .user .user__footer {
+  margin-top: 1rem;
+}
+
+body #articles .article .article__options, body #articles .article .user__options, body #articles .user .article__options, body #articles .user .user__options, body #article .article .article__options, body #article .article .user__options, body #article .user .article__options, body #article .user .user__options, body #users .article .article__options, body #users .article .user__options, body #users .user .article__options, body #users .user .user__options {
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -298,7 +302,7 @@ body #articles .article .article__options, body #article .article .article__opti
           align-items: center;
 }
 
-body #articles .article .article__options a, body #article .article .article__options a {
+body #articles .article .article__options a, body #articles .article .user__options a, body #articles .user .article__options a, body #articles .user .user__options a, body #article .article .article__options a, body #article .article .user__options a, body #article .user .article__options a, body #article .user .user__options a, body #users .article .article__options a, body #users .article .user__options a, body #users .user .article__options a, body #users .user .user__options a {
   display: block;
   position: absolute;
   left: 130px;
@@ -307,24 +311,24 @@ body #articles .article .article__options a, body #article .article .article__op
   text-decoration: none;
 }
 
-body #articles .article .article__options form, body #article .article .article__options form {
+body #articles .article .article__options form, body #articles .article .user__options form, body #articles .user .article__options form, body #articles .user .user__options form, body #article .article .article__options form, body #article .article .user__options form, body #article .user .article__options form, body #article .user .user__options form, body #users .article .article__options form, body #users .article .user__options form, body #users .user .article__options form, body #users .user .user__options form {
   position: absolute;
   left: 0;
   top: 10px;
 }
 
-body #articles .article .article__options .btn-info, body #article .article .article__options .btn-info {
+body #articles .article .article__options .btn-info, body #articles .article .user__options .btn-info, body #articles .user .article__options .btn-info, body #articles .user .user__options .btn-info, body #article .article .article__options .btn-info, body #article .article .user__options .btn-info, body #article .user .article__options .btn-info, body #article .user .user__options .btn-info, body #users .article .article__options .btn-info, body #users .article .user__options .btn-info, body #users .user .article__options .btn-info, body #users .user .user__options .btn-info {
   background: #475097;
   color: white;
 }
 
-body #articles .article .article__options .btn-danger, body #article .article .article__options .btn-danger {
+body #articles .article .article__options .btn-danger, body #articles .article .user__options .btn-danger, body #articles .user .article__options .btn-danger, body #articles .user .user__options .btn-danger, body #article .article .article__options .btn-danger, body #article .article .user__options .btn-danger, body #article .user .article__options .btn-danger, body #article .user .user__options .btn-danger, body #users .article .article__options .btn-danger, body #users .article .user__options .btn-danger, body #users .user .article__options .btn-danger, body #users .user .user__options .btn-danger {
   background: #D8545A;
   color: white;
   margin-left: 0;
 }
 
-body #articles .no-articles, body #article .no-articles {
+body #articles .no-articles, body #articles .no-users, body #article .no-articles, body #article .no-users, body #users .no-articles, body #users .no-users {
   padding: 1rem;
   text-align: center;
 }

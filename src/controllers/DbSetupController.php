@@ -117,6 +117,18 @@ class DbSetupController extends Controller
             )ENGINE=InnoDB;
             ");
             $res = $query->execute();
+
+            $query = $bdd->query("
+                CREATE PROCEDURE  getAllUsers()
+                    BEGIN
+                        SELECT 
+                            users.id,
+                            CONCAT(users.first_name,' ',users.last_name) AS full_name,
+                            users.email,
+                            users.created_at AS account_created_at
+                        FROM users;
+                    END;
+            ");
             debug($res);
         }
     
