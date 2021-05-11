@@ -8,4 +8,4 @@ define('DB_PASS', 'Ultime151515?');
 // site CONSTANTS
 define('SITENAME', '');
 define('BASE_URL', 'https://mymemories.frameworks.software');
-define('PUBLIC_URL', BASE_URL.'/');
+define('PUBLIC_URL', BASE_URL.'/'); 
