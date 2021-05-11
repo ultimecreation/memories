@@ -8,4 +8,4 @@ define('DB_PASS', 'sHQ!K5T4)X4C');
 // site CONSTANTS
 define('SITENAME', '');
 define('BASE_URL', 'https://software-framework.com/live/memories');
-define('PUBLIC_URL', BASE_URL.'/');
+define('PUBLIC_URL', BASE_URL.'/'); 
