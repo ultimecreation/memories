@@ -1,11 +1,11 @@
 <?php
 // database CONSTANTS
-define('DB_HOST', 'db5000768895.hosting-data.io');
-define('DB_NAME', 'dbs696196');
-define('DB_USER', 'dbu149561');
-define('DB_PASS', 'Ultime151515?');
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'softqmzs_memories');
+define('DB_USER', 'softqmzs_memories');
+define('DB_PASS', 'sHQ!K5T4)X4C');
 
 // site CONSTANTS
 define('SITENAME', '');
-define('BASE_URL', 'https://mymemories.frameworks.software');
+define('BASE_URL', 'https://software-framework.com/live/memories');
 define('PUBLIC_URL', BASE_URL.'/');
